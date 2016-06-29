@@ -6,8 +6,6 @@
       <th>Username</th>
       <th>Name</th>
       <th>Email</th>
-      <th>Password hash</th>
-      <th>Bio</th>
 
       <th></th>
     </tr>
@@ -18,8 +16,6 @@
       <td><%= user.username %></td>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-      <td><%= user.password_hash %></td>
-      <td><%= user.bio %></td>
 
       <td class="text-right">
         <%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %>
