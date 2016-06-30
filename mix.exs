@@ -18,8 +18,21 @@ defmodule Codecasts.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Codecasts, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+     applications: [
+      :phoenix,
+      :phoenix_pubsub,
+      :phoenix_html,
+      :cowboy,
+      :logger,
+      :gettext,
+      :phoenix_ecto,
+      :postgrex,
+      :comeonin,
+      :guardian,
+      :ueberauth,
+      :ueberauth_google
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment.

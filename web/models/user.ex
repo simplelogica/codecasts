@@ -1,12 +1,13 @@
 defmodule Codecasts.User do
   use Codecasts.Web, :model
 
+  alias Codecasts.Repo
+  alias Ueberauth.Auth
+
   schema "users" do
     field :username, :string
     field :name, :string
     field :email, :string
-    field :password, :string, virtual: true
-    field :password_hash, :string
     field :bio, :string
 
     timestamps()
@@ -17,35 +18,32 @@ defmodule Codecasts.User do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, [:username, :name, :email], [:bio])
+    |> cast(params, [:username, :name, :email, :bio])
     |> validate_required([:username, :name, :email])
     |> unique_constraint(:username)
     |> unique_constraint(:email)
   end
 
-  @doc """
-  Registration changeset that uses the normal changeset and also requires a password to generate
-  a valid password hash.
-  """
-  def registration_changeset(model, params \\ %{}) do
-    model
-    |> changeset(params)
-    |> cast(params, [:password], [])
-    |> validate_length(:password, min: 6, max: 100)
-    |> generate_password_hash()
+  def find_or_create_from_auth(model, %Auth{} = auth) do
+    user = from(from t in __MODULE__, where: t.email == ^auth.info.email, select: t)
+        |> Repo.one
+
+    if (user == nil) do
+      user = model
+        |> changeset(%{
+            name: auth.info.name,
+            username: get_username_from_email(auth.info.email),
+            email: auth.info.email
+            })
+        |> Repo.insert!
+    end
+
+    {:ok, user}
   end
 
-  # Auxiliar function to generate the password hash and put it on the changeset
-  #
-  defp generate_password_hash(changeset) do
-    case changeset do
-      # If it is a valid changeset and contains a password, regenerate the hash
-      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
-        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
-
-      # If not, just return the changeset without changes
-      _ ->
-        changeset
-    end
+  defp get_username_from_email(email) do
+    email
+    |> String.split("@")
+    |> Enum.at(0)
   end
 end

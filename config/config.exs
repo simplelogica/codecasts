@@ -29,6 +29,12 @@ config :guardian, Guardian,
   secret_key: to_string(Mix.env),
   serializer: Codecasts.GuardianSerializer
 
+config :ueberauth, Ueberauth,
+  base_path: "/sessions", # default is "/auth"
+  providers: [
+    google: {Ueberauth.Strategy.Google, []}
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
