@@ -16,7 +16,10 @@ exports.config = {
       }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: {
+        "css/app.css" : /^web\/static\/css\/(?!session.scss)/,
+        "css/session.css" : /^web\/static\/css\/session.scss/
+      }
     }
   },
 

@@ -8,11 +8,11 @@ defmodule Codecasts.LayoutView do
   end
 
   def flash_msg(%{"info" => msg}) do
-    ~E"<div class='alert alert-info'><%= msg %></div>"
+    ~E"<div class='alert alert-info'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= msg %></div>"
   end
 
   def flash_msg(%{"error" => msg}) do
-    ~E"<div class='alert alert-danger'><%= msg %></div>"
+    ~E"<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= msg %></div>"
   end
 
   def flash_msg(_) do

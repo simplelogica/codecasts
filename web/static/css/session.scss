@@ -1,0 +1,14 @@
+@import "theme/variables";
+@import "bootstrap";
+@import "theme/bootswatch";
+
+.session-container {
+  margin-top: 100px;
+  max-width: 400px;
+
+  .panel .panel-title {
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-align: center;
+  }
+}
