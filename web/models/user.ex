@@ -25,17 +25,20 @@ defmodule Codecasts.User do
   end
 
   def find_or_create_from_auth(model, %Auth{} = auth) do
-    user = from(from t in __MODULE__, where: t.email == ^auth.info.email, select: t)
+    user = from(from t in Codecasts.User, where: t.email == ^auth.info.email, select: t)
         |> Repo.one
 
-    if (user == nil) do
-      user = model
+    user = case user do
+      nil ->
+        model
         |> changeset(%{
             name: auth.info.name,
             username: get_username_from_email(auth.info.email),
             email: auth.info.email
             })
         |> Repo.insert!
+      _ ->
+        user
     end
 
     {:ok, user}
