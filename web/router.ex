@@ -32,6 +32,7 @@ defmodule Codecasts.Router do
     pipe_through [:browser, :browser_session] # Use the default browser stack
 
     get "/new", SessionController, :new
+    get "/google", SessionController, :create
   end
 
   # Other scopes may use custom stacks.

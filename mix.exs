@@ -40,7 +40,11 @@ defmodule Codecasts.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 2.0"},
-      {:guardian, "~> 0.12.0"}
+
+      # Auth
+      {:guardian, "~> 0.12.0"},
+      {:ueberauth, "~> 0.2"},
+      {:ueberauth_google, "~> 0.2"}
    ]
   end
 

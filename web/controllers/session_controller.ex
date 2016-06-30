@@ -4,6 +4,6 @@ defmodule Codecasts.SessionController do
   plug :put_layout, "session.html"
 
   def new(conn, _params) do
-    render conn, "login.html"
+    render conn, "new.html"
   end
 end
