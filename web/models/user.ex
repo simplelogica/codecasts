@@ -44,7 +44,7 @@ defmodule Codecasts.User do
 
       {:ok, user}
     else
-      {:error, "User forbidden"}
+      {:error, nil}
     end
   end
 
