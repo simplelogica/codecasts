@@ -1,4 +1,4 @@
-defmodule Codecasts.AuthHandler do
+defmodule Codecasts.AuthErrorHandler do
   use Codecasts.Web, :controller
 
   # The unauthenticated function is called because this controller has been
@@ -6,6 +6,6 @@ defmodule Codecasts.AuthHandler do
   def unauthenticated(conn, _params) do
     conn
     |> put_flash(:error, "Authentication required")
-    |> redirect(to: session_path(conn, :new))
+    |> redirect(to: session_path(conn, :login))
   end
 end

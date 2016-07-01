@@ -17,6 +17,11 @@ config :codecasts, Codecasts.Endpoint,
   pubsub: [name: Codecasts.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# E-mail address domains that can sign-in into the app.
+config :codecasts, :domain_whitelist, [
+  "the-cocktail.com"
+]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

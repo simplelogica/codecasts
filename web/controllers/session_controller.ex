@@ -14,7 +14,7 @@ defmodule Codecasts.SessionController do
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
     |> put_flash(:error, "Failed to authenticate.")
-    |> redirect(to: session_path(conn, :new))
+    |> redirect(to: session_path(conn, :login))
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
@@ -27,11 +27,18 @@ defmodule Codecasts.SessionController do
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)
-        |> redirect(to: session_path(conn, :new))
+        |> redirect(to: session_path(conn, :login))
     end
   end
 
-  def new(conn, _params) do
-    render conn, "new.html"
+  def login(conn, _params) do
+    render conn, "login.html"
+  end
+
+  def logout(conn, _params) do
+    conn
+    |> Guardian.Plug.sign_out
+    |> put_flash(:info, "Successfully logged out. See you!")
+    |> redirect(to: session_path(conn, :login))
   end
 end

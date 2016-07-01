@@ -28,21 +28,41 @@ defmodule Codecasts.User do
     user = from(from t in Codecasts.User, where: t.email == ^auth.info.email, select: t)
         |> Repo.one
 
-    user = case user do
-      nil ->
-        model
-        |> changeset(%{
-            name: auth.info.name,
-            username: get_username_from_email(auth.info.email),
-            email: auth.info.email
-            })
-        |> Repo.insert!
+    if check_email_domain(auth.info.email) do
+      user = case user do
+        nil ->
+          model
+          |> changeset(%{
+              name: auth.info.name,
+              username: get_username_from_email(auth.info.email),
+              email: auth.info.email
+              })
+          |> Repo.insert!
+        _ ->
+          user
+      end
+
+      {:ok, user}
+    else
+      {:error, "User forbidden"}
+    end
+  end
+
+  defp check_email_domain(email) do
+    domain_whitelist = Application.get_env(:codecasts, :domain_whitelist)
+
+    valid = case length(domain_whitelist) do
+      0 ->
+        true
       _ ->
-        user
+        domain_whitelist
+        |> Enum.map( fn(x) -> email |> String.split("@") |> Enum.at(1) == x end )
+        |> Enum.any?(fn(x) -> x == true end)
     end
 
-    {:ok, user}
+    valid
   end
+
 
   defp get_username_from_email(email) do
     email
