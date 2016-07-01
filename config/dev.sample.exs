@@ -41,3 +41,7 @@ config :codecasts, Codecasts.Repo,
   database: "codecasts_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: System.get_env("GOOGLE_CLIENT_ID"),
+  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")

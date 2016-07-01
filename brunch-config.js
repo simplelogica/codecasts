@@ -2,31 +2,24 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js"
-
       // To use a separate vendor.js bundle, specify two files path
       // http://brunch.io/docs/config#-files-
-      // joinTo: {
-      //  "js/app.js": /^(web\/static\/js)/,
-      //  "js/vendor.js": /^(web\/static\/vendor)|(deps)/
-      // }
+      joinTo: "js/app.js",
+
       //
       // To change the order of concatenation of files, explicitly mention here
-      // order: {
-      //   before: [
-      //     "web/static/vendor/js/jquery-2.1.1.js",
-      //     "web/static/vendor/js/bootstrap.min.js"
-      //   ]
-      // }
-    },
-    stylesheets: {
-      joinTo: "css/app.css",
       order: {
-        after: ["web/static/css/app.css"] // concat app.css last
+        before: [
+          "web/static/vendor/js/jquery-2.2.4.min.js",
+          "web/static/vendor/js/bootstrap.js"
+        ]
       }
     },
-    templates: {
-      joinTo: "js/app.js"
+    stylesheets: {
+      joinTo: {
+        "css/app.css" : /^web\/static\/css\/(?!session.scss)/,
+        "css/session.css" : /^web\/static\/css\/session.scss/
+      }
     }
   },
 
@@ -54,6 +47,14 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+    sass: {
+      mode: 'native',
+      options: {
+        includePaths: [
+          "web/static/vendor/css"
+        ]
+      }
     }
   },
 

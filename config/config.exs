@@ -17,10 +17,28 @@ config :codecasts, Codecasts.Endpoint,
   pubsub: [name: Codecasts.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# E-mail address domains that can sign-in into the app.
+config :codecasts, :domain_whitelist, [
+  "the-cocktail.com"
+]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+config :guardian, Guardian,
+  issuer: "Codecasts.#{Mix.env}",
+  ttl: { 30, :days },
+  verify_issuer: true, # optional
+  secret_key: to_string(Mix.env),
+  serializer: Codecasts.GuardianSerializer
+
+config :ueberauth, Ueberauth,
+  base_path: "/sessions", # default is "/auth"
+  providers: [
+    google: {Ueberauth.Strategy.Google, []}
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
