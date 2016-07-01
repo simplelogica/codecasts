@@ -28,7 +28,8 @@ defmodule Codecasts.Router do
   scope "/", Codecasts do
     pipe_through [:browser, :browser_session, :require_login]
 
-    resources "/users", UserController
+    get "/profile", UserController, :edit
+    put "/profile", UserController, :update
 
     get "/", PageController, :index
   end
