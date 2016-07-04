@@ -13,13 +13,18 @@
 <%= for event <- @events do %>
     <tr>
       <td><%= event.title %></td>
-      <td><%= event.user_id %></td>
+      <td><%= event.user.name %></td>
       <td><%= event.date %></td>
 
       <td class="text-right">
         <%= link "Show", to: event_path(@conn, :show, event), class: "btn btn-default btn-xs" %>
+        <%= if (event.user == @current_user) do %>
         <%= link "Edit", to: event_path(@conn, :edit, event), class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <% else %>
+        <%= link "Edit", to: "#", class: "btn btn-default btn-xs disabled" %>
+        <%= link "Delete", to: "#", class: "btn btn-danger btn-xs disabled" %>
+        <% end %>
       </td>
     </tr>
 <% end %>

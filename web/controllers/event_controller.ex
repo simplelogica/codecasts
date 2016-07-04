@@ -6,7 +6,9 @@ defmodule Codecasts.EventController do
   alias Codecasts.Event
 
   def index(conn, _params) do
-    events = Repo.all(Event)
+    query = from e in Event, preload: [:user]
+    events = Repo.all(query)
+
     render(conn, "index.html", events: events)
   end
 
@@ -34,19 +36,22 @@ defmodule Codecasts.EventController do
   end
 
   def show(conn, %{"id" => id}) do
-    event = Repo.get!(Event, id)
+    event = Event
+    |> Repo.get!(id)
+    |> preload(:user)
+
     render(conn, "show.html", event: event)
   end
 
-  def edit(conn, %{"id" => id}) do
-    event = conn.assign.event
+  def edit(conn, %{"id" => _id}) do
+    event = conn.assigns.event
 
     changeset = Event.changeset(event)
     render(conn, "edit.html", event: event, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "event" => event_params}) do
-    event = conn.assign.event
+  def update(conn, %{"id" => _id, "event" => event_params}) do
+    event = conn.assigns.event
 
     changeset = Event.changeset(event, event_params)
 
@@ -60,8 +65,8 @@ defmodule Codecasts.EventController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    event = conn.assign.event
+  def delete(conn, %{"id" => _id}) do
+    event = conn.assigns.event
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
