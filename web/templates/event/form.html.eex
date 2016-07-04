@@ -1,47 +1,74 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [class: "form-horizontal"], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p><%= gettext("Oops, something went wrong! Please check the errors below.") %></p>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= label f, :title, class: "control-label" %>
-    <%= text_input f, :title, class: "form-control" %>
-    <%= error_tag f, :title %>
+  <div class="form-group form-group-lg">
+    <%= label f, :title, class: "control-label col-sm-2" %>
+    <div class="col-sm-10">
+      <%= text_input f, :title, class: "form-control", placeholder: gettext("Title") %>
+      <%= error_tag f, :title %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= label f, :description, class: "control-label" %>
-    <%= textarea f, :description, class: "form-control" %>
-    <%= error_tag f, :description %>
+    <%= label f, :description, class: "control-label col-sm-2" %>
+    <div class="col-sm-10">
+      <%= textarea f, :description, class: "form-control" %>
+      <%= error_tag f, :description %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= label f, :video_url, class: "control-label" %>
-    <%= text_input f, :video_url, class: "form-control" %>
-    <%= error_tag f, :video_url %>
+    <hr class="divider" />
   </div>
 
   <div class="form-group">
-    <%= label f, :slideshow_url, class: "control-label" %>
-    <%= text_input f, :slideshow_url, class: "form-control" %>
-    <%= error_tag f, :slideshow_url %>
+    <%= label f, :video_url, gettext("Video URL"), class: "control-label col-sm-2" %>
+    <div class="col-sm-10">
+      <%= text_input f, :video_url, class: "form-control" %>
+      <%= error_tag f, :video_url %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= label f, :repository_url, class: "control-label" %>
-    <%= text_input f, :repository_url, class: "form-control" %>
-    <%= error_tag f, :repository_url %>
+    <%= label f, :slideshow_url, gettext("Slideshow URL"), class: "control-label col-sm-2" %>
+    <div class="col-sm-10">
+      <%= text_input f, :slideshow_url, class: "form-control" %>
+      <%= error_tag f, :slideshow_url %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= label f, :date, class: "control-label" %>
-    <%= datetime_select f, :date, class: "form-control" %>
-    <%= error_tag f, :date %>
+    <%= label f, :repository_url, gettext("Repository URL"), class: "control-label col-sm-2" %>
+    <div class="col-sm-10">
+      <%= text_input f, :repository_url, class: "form-control" %>
+      <%= error_tag f, :repository_url %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+    <hr class="divider" />
+  </div>
+
+  <div class="form-group">
+    <%= label f, :date, gettext("Event date"), class: "control-label col-sm-2" %>
+    <div class="col-sm-10">
+      <%= datetime_select f, :date, class: "form-control" %>
+      <%= error_tag f, :date %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <hr class="divider" />
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= submit gettext("Save changes"), class: "btn btn-primary" %>
+      <%= link gettext("Back to list"), to: event_path(@conn, :index), class: "btn btn-default pull-right" %>
+    </div>
   </div>
 <% end %>
