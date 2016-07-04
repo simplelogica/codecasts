@@ -2,12 +2,33 @@ defmodule Codecasts.EventView do
   use Codecasts.Web, :view
 
   @event_place_names %{
-    madrid: "Madrid",
-    oviedo: "Oviedo",
-    online: "Online"
+    all: gettext("All places"),
+    madrid: gettext("Madrid"),
+    oviedo: gettext("Oviedo"),
+    online: gettext("Online")
   }
 
-  def get_event_place_name(event_place) do
+  def get_places(include_all \\ false) do
+    places = EventPlaceEnum.__enum_map__()
+    |> Keyword.keys()
+
+    case include_all do
+      true ->
+        [:all, places]
+        |> List.flatten()
+      _ ->
+        places
+    end
+  end
+
+  def get_places_for_select(include_all \\ false) do
+    get_places(include_all)
+    |> Enum.map(fn p ->
+      {get_place_name(p), p}
+    end)
+  end
+
+  def get_place_name(event_place) do
     @event_place_names
     |> Map.get(event_place)
   end

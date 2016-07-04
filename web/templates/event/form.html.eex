@@ -28,7 +28,7 @@
   <div class="form-group">
     <%= label f, :place, gettext("Event place"), class: "control-label col-sm-2" %>
     <div class="col-sm-10">
-      <%= select f, :place, %{get_event_place_name(:madrid) => "madrid", get_event_place_name(:oviedo) => "oviedo", get_event_place_name(:online) => "online"}, class: "form-control" %>
+      <%= select f, :place, get_places_for_select(), class: "form-control" %>
       <%= error_tag f, :place %>
     </div>
   </div>

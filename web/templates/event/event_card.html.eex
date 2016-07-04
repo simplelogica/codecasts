@@ -18,7 +18,7 @@
         </p>
         <p>
           <b><%= gettext("Where?") %></b>
-          <span><%= get_event_place_name(@event.place) %></span>
+          <span><%= get_place_name(@event.place) %></span>
         </p>
       </div>
       <div class="pull-right">
