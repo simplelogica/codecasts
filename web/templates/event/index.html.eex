@@ -13,7 +13,7 @@
 <%= for event <- @events do %>
     <tr>
       <td><%= event.title %></td>
-      <td><%= event.creator_id %></td>
+      <td><%= event.user_id %></td>
       <td><%= event.date %></td>
 
       <td class="text-right">

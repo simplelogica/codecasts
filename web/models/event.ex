@@ -10,7 +10,7 @@ defmodule Codecasts.Event do
     field :date, Ecto.DateTime
     field :place, EventPlaceEnum
 
-    belongs_to :creator, Codecasts.Creator
+    belongs_to :user, Codecasts.User
 
     timestamps()
   end
@@ -20,8 +20,8 @@ defmodule Codecasts.Event do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :description, :video_url, :slideshow_url, :repository_url, :date, :place])
-    |> validate_required([:title, :description, :date])
+    |> cast(params, [:title, :description, :video_url, :slideshow_url, :repository_url, :date, :place, :user_id])
+    |> validate_required([:title, :description, :date, :user_id])
     |> validate_format_optional(:video_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
     |> validate_format_optional(:slideshow_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
     |> validate_format_optional(:repository_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
