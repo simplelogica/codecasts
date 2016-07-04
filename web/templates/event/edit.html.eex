@@ -1,6 +1,7 @@
-<h2>Edit event</h2>
+<div class="page-header">
+  <h2><%= gettext("Edit event") %> <small><%= gettext("Change the details below") %></small></h2>
+</div>
 
 <%= render "form.html", changeset: @changeset,
-                        action: event_path(@conn, :update, @event) %>
-
-<%= link "Back", to: event_path(@conn, :index) %>
+                        action: event_path(@conn, :update, @event),
+                        conn: @conn %>
