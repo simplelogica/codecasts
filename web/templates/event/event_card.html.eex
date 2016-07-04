@@ -1,7 +1,9 @@
 <div class="col-sm-6 col-md-4">
   <div class="event-card thumbnail">
+    <%= if (assigns[:show_image]) do %>
     <%= link to: event_path(@conn, :show, @event) do %>
       <img src="http://placehold.it/640x480" />
+    <% end %>
     <% end %>
     <div class="caption clearfix">
       <h4><%= link @event.title, to: event_path(@conn, :show, @event) %></h4>

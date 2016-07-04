@@ -7,7 +7,7 @@
 
 <%= if (Enum.count(@events) > 0) do %>
 <div class="row">
-  <%= render_many(@events, Codecasts.EventView, "event_card.html", conn: @conn) %>
+  <%= render_many(@events, Codecasts.EventView, "event_card.html", show_image: true, conn: @conn) %>
 </div>
 <% else %>
 <div class="jumbotron text-center">
