@@ -1,6 +1,6 @@
 <div class="page-header">
-  <h2>
-    <%= gettext("List of events") %> <small><%= gettext("showing all") %></small>
+  <h2 class="clearfix">
+    <%= gettext("List of events") %> <small><%= get_results_subtitle(@conn) %></small>
     <button class="btn btn-default pull-right" type="button" data-toggle="collapse" data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
       Search
     </button>
