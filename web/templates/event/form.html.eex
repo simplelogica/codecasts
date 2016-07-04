@@ -64,7 +64,7 @@
   <div class="form-group">
     <%= label f, :date, gettext("Event date"), class: "control-label col-sm-2" %>
     <div class="col-sm-10">
-      <%= datetime_select f, :date, class: "form-control" %>
+      <%= text_input f, :date, class: "form-control", data: [datetime: true, enabletime: true] %>
       <%= error_tag f, :date %>
     </div>
   </div>
