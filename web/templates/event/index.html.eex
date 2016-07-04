@@ -1,12 +1,12 @@
 <h2>Listing events</h2>
 
-<table class="table">
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Creator</th>
-      <th>Date</th>
-      <th></th>
+      <th class="col-sm-4"><%= gettext("Title") %></th>
+      <th class="col-sm-3"><%= gettext("Creator") %></th>
+      <th class="col-sm-2"><%= gettext("Date") %></th>
+      <th class="col-sm-3"></th>
     </tr>
   </thead>
   <tbody>
