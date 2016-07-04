@@ -57,7 +57,10 @@ defmodule Codecasts.Mixfile do
       # Auth
       {:guardian, "~> 0.12.0"},
       {:ueberauth, "~> 0.2"},
-      {:ueberauth_google, "~> 0.2"}
+      {:ueberauth_google, "~> 0.2"},
+
+      # Enums
+      {:ecto_enum, "~> 0.3.0"}
    ]
   end
 
