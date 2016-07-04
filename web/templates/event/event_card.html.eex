@@ -1,6 +1,8 @@
 <div class="col-sm-6 col-md-4">
   <div class="event-card thumbnail">
-    <img src="http://placehold.it/640x480" />
+    <%= link to: event_path(@conn, :show, @event) do %>
+      <img src="http://placehold.it/640x480" />
+    <% end %>
     <div class="caption clearfix">
       <h4><%= link @event.title, to: event_path(@conn, :show, @event) %></h4>
       <div class='who-when-where'>
@@ -20,8 +22,8 @@
       <p><%= get_short_description(@event) %></p>
       <div class="pull-right">
         <%= if (@event.user == @conn.assigns.current_user) do %>
-        <%= link "Edit", to: event_path(@conn, :edit, @event), class: "btn btn-default btn-sm" %>
-        <%= link "Delete", to: event_path(@conn, :delete, @event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-sm" %>
+        <%= link gettext("Edit"), to: event_path(@conn, :edit, @event), class: "btn btn-default btn-sm" %>
+        <%= link gettext("Delete"), to: event_path(@conn, :delete, @event), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm" %>
         <% end %>
       </div>
     </div>

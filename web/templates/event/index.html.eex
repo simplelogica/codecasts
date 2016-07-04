@@ -1,10 +1,19 @@
 <div class="page-header">
   <h2>
     <%= gettext("List of events") %> <small><%= gettext("showing all") %></small>
-    <%= link "Add new event", to: event_path(@conn, :new), class: "btn btn-info pull-right" %>
+    <%= link gettext("Add new event"), to: event_path(@conn, :new), class: "btn btn-info pull-right" %>
   </h2>
 </div>
 
+<%= if (Enum.count(@events) > 0) do %>
 <div class="row">
-  <%= render_many(@events, Codecasts.EventView, "event.html", conn: @conn) %>
+  <%= render_many(@events, Codecasts.EventView, "event_card.html", conn: @conn) %>
 </div>
+<% else %>
+<div class="jumbotron text-center">
+  <p class="lead"><%= gettext("Upss! there is nothing here (yet)") %></p>
+  <p>
+    <%= link gettext("Add new event"), to: event_path(@conn, :new), class: "btn btn-lg btn-primary" %>
+  </p>
+</div>
+<% end %>
