@@ -1,0 +1,43 @@
+<h2>Show event</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @event.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @event.description %>
+  </li>
+
+  <li>
+    <strong>Video url:</strong>
+    <%= @event.video_url %>
+  </li>
+
+  <li>
+    <strong>Slideshow url:</strong>
+    <%= @event.slideshow_url %>
+  </li>
+
+  <li>
+    <strong>Repository url:</strong>
+    <%= @event.repository_url %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @event.date %>
+  </li>
+
+  <li>
+    <strong>Creator:</strong>
+    <%= @event.creator_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: event_path(@conn, :edit, @event) %>
+<%= link "Back", to: event_path(@conn, :index) %>

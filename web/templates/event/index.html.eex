@@ -1,0 +1,38 @@
+<h2>Listing events</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Video url</th>
+      <th>Slideshow url</th>
+      <th>Repository url</th>
+      <th>Date</th>
+      <th>Creator</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for event <- @events do %>
+    <tr>
+      <td><%= event.title %></td>
+      <td><%= event.description %></td>
+      <td><%= event.video_url %></td>
+      <td><%= event.slideshow_url %></td>
+      <td><%= event.repository_url %></td>
+      <td><%= event.date %></td>
+      <td><%= event.creator_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: event_path(@conn, :show, event), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: event_path(@conn, :edit, event), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New event", to: event_path(@conn, :new) %>
