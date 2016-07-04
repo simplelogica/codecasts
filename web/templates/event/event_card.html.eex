@@ -19,7 +19,6 @@
           <span><%= get_event_place_name(@event.place) %></span>
         </p>
       </div>
-      <p><%= get_short_description(@event) %></p>
       <div class="pull-right">
         <%= if (@event.user == @conn.assigns.current_user) do %>
         <%= link gettext("Edit"), to: event_path(@conn, :edit, @event), class: "btn btn-default btn-sm" %>
