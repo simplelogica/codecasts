@@ -60,7 +60,9 @@ defmodule Codecasts.Mixfile do
       {:ueberauth_google, "~> 0.2"},
 
       # Enums
-      {:ecto_enum, "~> 0.3.0"}
+      {:ecto_enum, "~> 0.3.0"},
+      # DateTime funcs
+      {:calecto, "~> 0.16.0"}
    ]
   end
 

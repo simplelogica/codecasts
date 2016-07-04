@@ -6,8 +6,9 @@ defmodule Codecasts.EventController do
   alias Codecasts.Event
 
   def index(conn, _params) do
-    query = from e in Event, preload: [:user]
-    events = Repo.all(query)
+    events = Event
+    |> preload(:user)
+    |> Repo.all()
 
     render(conn, "index.html", events: events)
   end
@@ -37,8 +38,8 @@ defmodule Codecasts.EventController do
 
   def show(conn, %{"id" => id}) do
     event = Event
-    |> Repo.get!(id)
     |> preload(:user)
+    |> Repo.get!(id)
 
     render(conn, "show.html", event: event)
   end

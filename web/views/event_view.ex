@@ -11,4 +11,11 @@ defmodule Codecasts.EventView do
     @event_place_names
     |> Map.get(event_place)
   end
+
+  def get_short_description(event) do
+    result = event.description
+    |> String.slice(0..100)
+
+    "#{result}..."
+  end
 end

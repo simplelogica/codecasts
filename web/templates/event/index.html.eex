@@ -1,34 +1,10 @@
-<h2>Listing events</h2>
+<div class="page-header">
+  <h2>
+    <%= gettext("List of events") %> <small><%= gettext("showing all") %></small>
+    <%= link "Add new event", to: event_path(@conn, :new), class: "btn btn-info pull-right" %>
+  </h2>
+</div>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th class="col-sm-4"><%= gettext("Title") %></th>
-      <th class="col-sm-3"><%= gettext("Creator") %></th>
-      <th class="col-sm-2"><%= gettext("Date") %></th>
-      <th class="col-sm-3"></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for event <- @events do %>
-    <tr>
-      <td><%= event.title %></td>
-      <td><%= event.user.name %></td>
-      <td><%= event.date %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: event_path(@conn, :show, event), class: "btn btn-default btn-xs" %>
-        <%= if (event.user == @current_user) do %>
-        <%= link "Edit", to: event_path(@conn, :edit, event), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-        <% else %>
-        <%= link "Edit", to: "#", class: "btn btn-default btn-xs disabled" %>
-        <%= link "Delete", to: "#", class: "btn btn-danger btn-xs disabled" %>
-        <% end %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= link "New event", to: event_path(@conn, :new) %>
+<div class="row">
+  <%= render_many(@events, Codecasts.EventView, "event.html", conn: @conn) %>
+</div>
