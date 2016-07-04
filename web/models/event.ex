@@ -28,6 +28,32 @@ defmodule Codecasts.Event do
   end
 
   @doc """
+  Scope to filter events by title or description.
+  Return query without modification if no string or empty string is received.
+  """
+  def filter_by_text(query, str) when (is_binary(str)) do
+    query_string = "%#{str}%"
+
+    if String.length(str) > 0 do
+      from e in query,
+        where: (like(e.title, ^query_string)) or (like(e.description, ^query_string))
+    else
+      query
+    end
+  end
+  def filter_by_text(query, _), do: query
+
+  @doc """
+  Scope to filter events by place.
+  Return query without modification if no atom is received.
+  """
+  def filter_by_place(query, place) when (is_atom(place)) do
+    from e in query,
+      where: e.place == ^place
+  end
+  def filter_by_place(query, _), do: query
+
+  @doc """
   Scope to get `number` events coming soon.
   """
   def next_events(number \\ 3) do

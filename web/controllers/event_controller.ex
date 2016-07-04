@@ -5,6 +5,16 @@ defmodule Codecasts.EventController do
 
   alias Codecasts.Event
 
+  def index(conn, %{"filter" => filters}) do
+    events = Event
+    |> Event.filter_by_text(Map.get(filters, "q"))
+    |> Event.filter_by_place(Map.get(filters, "place"))
+    |> preload(:user)
+    |> Repo.all()
+
+    render(conn, "index.html", events: events)
+  end
+
   def index(conn, _params) do
     events = Event
     |> preload(:user)
