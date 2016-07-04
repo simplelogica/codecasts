@@ -30,14 +30,18 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <% controller =  @conn.private.phoenix_controller %>
+            <li <%= if (controller == Codecasts.PageController) do 'class=active' end %>>
+              <%= link gettext("Start"), to: page_path(@conn, :index) %>
+            </li>
+            <li <%= if (controller == Codecasts.EventController) do 'class=active' end %>>
+              <%= link gettext("Events"), to: event_path(@conn, :index) %>
+            </li>
           </ul>
           <ul class="nav navbar-nav pull-right">
             <li>
               <p class="navbar-btn">
-                <%= link gettext("Add new event"), to: "#", class: "btn btn-primary" %>
+                <%= link gettext("Add new event"), to: event_path(@conn, :new), class: "btn btn-primary" %>
               </p>
             </li>
             <li class="divider-vertical"></li>

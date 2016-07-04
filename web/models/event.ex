@@ -19,6 +19,18 @@ defmodule Codecasts.Event do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title, :description, :video_url, :slideshow_url, :repository_url, :date])
-    |> validate_required([:title, :description, :video_url, :slideshow_url, :repository_url, :date])
+    |> validate_required([:title, :description, :date])
+    |> validate_format_optional(:video_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
+    |> validate_format_optional(:slideshow_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
+    |> validate_format_optional(:repository_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
+  end
+
+  defp validate_format_optional(changeset, field, format, opts \\ []) do
+    if (changeset.changes[field] && String.length(changeset.changes[field]) > 0) do
+      changeset
+      |> validate_format(field, format, opts)
+    else
+      changeset
+    end
   end
 end
