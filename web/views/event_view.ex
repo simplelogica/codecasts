@@ -76,4 +76,8 @@ defmodule Codecasts.EventView do
     @event_place_names
     |> Map.get(event_place)
   end
+
+  def format_description(text) do
+    String.replace(text, "\n", "<br />")
+  end
 end

@@ -28,9 +28,19 @@
     padding-bottom: 20px;
     border-bottom: 1px solid #eee;
 
+    &.description {
+      span {
+        font-size: 0.9em;
+      }
+    }
+
     b {
       display: inline-block;
       min-width: 130px;
+    }
+
+    span {
+      text-transform: none;
     }
   }
 }

@@ -7,7 +7,7 @@
     <div class='description metadata'>
       <b><%= gettext("What?") %></b>
       <hr class="divider" />
-      <span><%= @event.description %></span>
+      <span><%= raw format_description(@event.description) %></span>
     </div>
     <div class='who metadata'>
       <b><%= gettext("Who?") %></b>
