@@ -31,6 +31,8 @@ defmodule Codecasts.Router do
     get "/profile", UserController, :edit
     put "/profile", UserController, :update
 
+    resources "/events", EventController
+    
     get "/", PageController, :index
   end
 

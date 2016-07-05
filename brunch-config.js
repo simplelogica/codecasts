@@ -11,7 +11,8 @@ exports.config = {
       order: {
         before: [
           "web/static/vendor/js/jquery-2.2.4.min.js",
-          "web/static/vendor/js/bootstrap.js"
+          "web/static/vendor/js/bootstrap.js",
+          "web/static/vendor/js/moment.js"
         ]
       }
     },

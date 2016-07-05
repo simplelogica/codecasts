@@ -13,6 +13,21 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
 
+$(function(){
+  flatpickr('[data-datetime]', {
+    enabletime: true,
+    enableseconds: true,
+    timeFormat: "h:i:S",
+    altInput: true,
+    altInputClass: 'form-control',
+    altFormat: 'd/m/Y -',
+
+    timeFormat: 'H:i:S',
+    dateFormat: 'Y-m-d'
+  });
+});
+
+
 // Import local files
 //
 // Local files can be imported directly using relative

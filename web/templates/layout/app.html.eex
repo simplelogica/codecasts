@@ -26,15 +26,25 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Codecasts</a>
+          <%= link gettext("CodeCasts"), to: page_path(@conn, :index), class: "navbar-brand" %>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <% controller =  @conn.private.phoenix_controller %>
+            <li <%= if (controller == Codecasts.PageController) do 'class=active' end %>>
+              <%= link gettext("Start"), to: page_path(@conn, :index) %>
+            </li>
+            <li <%= if (controller == Codecasts.EventController) do 'class=active' end %>>
+              <%= link gettext("Events"), to: event_path(@conn, :index) %>
+            </li>
           </ul>
           <ul class="nav navbar-nav pull-right">
+            <li>
+              <p class="navbar-btn">
+                <%= link gettext("Add new event"), to: event_path(@conn, :new), class: "btn btn-primary" %>
+              </p>
+            </li>
+            <li class="divider-vertical"></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= @current_user.username %> <span class="caret"></span></a>
               <ul class="dropdown-menu">

@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h2><%= gettext("Add new event") %> <small><%= gettext("Fill the details below") %></small></h2>
+</div>
+
+<%= render "form.html", changeset: @changeset,
+                        action: event_path(@conn, :create),
+                        conn: @conn %>

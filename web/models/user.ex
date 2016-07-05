@@ -10,6 +10,8 @@ defmodule Codecasts.User do
     field :email, :string
     field :bio, :string
 
+    has_many :events, Codecasts.Event
+
     timestamps()
   end
 

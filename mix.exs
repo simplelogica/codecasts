@@ -4,7 +4,7 @@ defmodule Codecasts.Mixfile do
   def project do
     [app: :codecasts,
      version: "0.0.1",
-     elixir: "~> 1.2.6",
+     elixir: ">= 1.2.6",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -57,7 +57,12 @@ defmodule Codecasts.Mixfile do
       # Auth
       {:guardian, "~> 0.12.0"},
       {:ueberauth, "~> 0.2"},
-      {:ueberauth_google, "~> 0.2"}
+      {:ueberauth_google, "~> 0.2"},
+
+      # Enums
+      {:ecto_enum, "~> 0.3.0"},
+      # DateTime funcs
+      {:calecto, "~> 0.16.0"}
    ]
   end
 

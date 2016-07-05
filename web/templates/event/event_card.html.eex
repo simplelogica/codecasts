@@ -1,0 +1,32 @@
+<div class="col-sm-6 col-md-4">
+  <div class="event-card thumbnail">
+    <%= if (assigns[:show_image]) do %>
+    <%= link to: event_path(@conn, :show, @event) do %>
+      <img src="http://placehold.it/640x480" />
+    <% end %>
+    <% end %>
+    <div class="caption clearfix">
+      <h4><%= link @event.title, to: event_path(@conn, :show, @event) %></h4>
+      <div class='who-when-where'>
+        <p>
+          <b><%= gettext("Who?") %></b>
+          <span><%= @event.user.name %></span>
+        </p>
+        <p>
+          <b><%= gettext("When?") %></b>
+          <span><%= Calendar.Strftime.strftime!(@event.date, "%d/%m/%Y - %H:%M") %></span>
+        </p>
+        <p>
+          <b><%= gettext("Where?") %></b>
+          <span><%= get_place_name(@event.place) %></span>
+        </p>
+      </div>
+      <div class="pull-right">
+        <%= if (@event.user == @conn.assigns.current_user) do %>
+        <%= link gettext("Edit"), to: event_path(@conn, :edit, @event), class: "btn btn-default btn-sm" %>
+        <%= link gettext("Delete"), to: event_path(@conn, :delete, @event), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-sm" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

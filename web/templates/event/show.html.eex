@@ -1,0 +1,63 @@
+<div class="page-header">
+  <h3><%= @event.title %></h3>
+</div>
+
+<div class="row event-data">
+  <div class="col-sm-8 lead">
+    <div class='description metadata'>
+      <b><%= gettext("What?") %></b>
+      <hr class="divider" />
+      <span><%= raw format_description(@event.description) %></span>
+    </div>
+    <div class='who metadata'>
+      <b><%= gettext("Who?") %></b>
+      <span><%= @event.user.name %></span>
+    </div>
+    <div class='when metadata'>
+      <b><%= gettext("When?") %></b>
+      <span><%= Calendar.Strftime.strftime!(@event.date, "%d/%m/%Y - %H:%M") %></span>
+    </div>
+    <div class='where metadata'>
+      <b><%= gettext("Where?") %></b>
+      <span><%= get_place_name(@event.place) %></span>
+    </div>
+    <div class='recorded-video metadata'>
+      <b><%= gettext("Video") %></b>
+      <span>
+        <%= if (String.length(@event.video_url) > 0) do %>
+        <%= link @event.video_url, to: @event.video_url %>
+        <% else %>
+        <%= gettext("Not available") %>
+        <% end %>
+      </span>
+    </div>
+    <div class='slideshow metadata'>
+      <b><%= gettext("Slideshow") %></b>
+      <span>
+        <%= if (String.length(@event.slideshow_url) > 0) do %>
+        <%= link @event.slideshow_url, to: @event.slideshow_url %>
+        <% else %>
+        <%= gettext("Not available") %>
+        <% end %>
+      </span>
+    </div>
+    <div class='repository metadata'>
+      <b><%= gettext("Repository") %></b>
+      <span>
+        <%= if (String.length(@event.repository_url) > 0) do %>
+        <%= link @event.repository_url, to: @event.repository_url %>
+        <% else %>
+        <%= gettext("Not available") %>
+        <% end %>
+      </span>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <img src="http://placehold.it/640x480" width="100%" />
+    <%= if (@event.user == @conn.assigns.current_user) do %>
+    <hr class="divider" />
+    <%= link gettext("Edit"), to: event_path(@conn, :edit, @event), class: "btn btn-default btn-block btn-lg" %>&nbsp;
+    <%= link gettext("Delete"), to: event_path(@conn, :delete, @event), method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-block btn-lg" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h2 class="clearfix">
+    <%= gettext("List of events") %> <small><%= get_results_subtitle(@conn) %></small>
+    <button class="btn btn-default pull-right" type="button" data-toggle="collapse" data-target="#filterForm" aria-expanded="false" aria-controls="filterForm">
+      Search
+    </button>
+  </h2>
+</div>
+<div class="collapse" id="filterForm">
+  <%= form_for @conn, event_path(@conn, :index), [as: :filter, method: :get, class: "form-horizontal"], fn f -> %>
+  <div class="form-group">
+    <%= label :q, gettext("Search"), class: "control-label col-sm-2" %>
+    <div class="col-sm-10">
+      <%= text_input f, :q, class: "form-control", placeholder: gettext("Search terms...") %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= label :place, gettext("Event place"), class: "control-label col-sm-2" %>
+    <div class="col-sm-10">
+      <%= select f, :place, get_places_for_select(true), class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= submit gettext("Filter"), class: "btn btn-primary btn-sm pull-right" %>
+    </div>
+  </div>
+  <% end %>
+  <hr class='divider' />
+</div>
+
+<%= if (Enum.count(@events) > 0) do %>
+<div class="row">
+  <%= render_many(@events, Codecasts.EventView, "event_card.html", show_image: true, conn: @conn) %>
+</div>
+<% else %>
+<div class="jumbotron text-center">
+  <p class="lead"><%= gettext("Upss! there is nothing here (yet)") %></p>
+  <p>
+    <%= link gettext("Add new event"), to: event_path(@conn, :new), class: "btn btn-lg btn-primary" %>
+  </p>
+</div>
+<% end %>
