@@ -2,7 +2,7 @@
   <div class="event-card thumbnail">
     <%= if (assigns[:show_image]) do %>
     <%= link to: event_path(@conn, :show, @event) do %>
-      <img src="http://placehold.it/640x480" />
+      <img src="<%= Codecasts.EventImage.url({@event.image, @event}, :square) %>" />
     <% end %>
     <% end %>
     <div class="caption clearfix">

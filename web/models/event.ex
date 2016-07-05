@@ -1,5 +1,6 @@
 defmodule Codecasts.Event do
   use Codecasts.Web, :model
+  use Arc.Ecto.Schema
 
   schema "events" do
     field :title, :string
