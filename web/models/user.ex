@@ -33,13 +33,21 @@ defmodule Codecasts.User do
     if check_email_domain(auth.info.email) do
       user = case user do
         nil ->
-          model
+          c = model
           |> changeset(%{
               name: auth.info.name,
               username: get_username_from_email(auth.info.email),
               email: auth.info.email
               })
-          |> Repo.insert!
+
+          c = case String.length(c.changes.name) do
+            0 ->
+              c |> put_change(:name, get_username_from_email(auth.info.email))
+            _ ->
+              c
+          end
+
+          c |> Repo.insert!
         _ ->
           user
       end
