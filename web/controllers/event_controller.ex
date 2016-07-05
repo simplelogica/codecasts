@@ -7,6 +7,7 @@ defmodule Codecasts.EventController do
 
   def index(conn, %{"filter" => filters}) do
     events = Event
+    |> Event.default_order()
     |> Event.filter_by_text(Map.get(filters, "q"))
     |> Event.filter_by_place(Map.get(filters, "place"))
     |> preload(:user)
@@ -17,6 +18,7 @@ defmodule Codecasts.EventController do
 
   def index(conn, _params) do
     events = Event
+    |> Event.default_order()
     |> preload(:user)
     |> Repo.all()
 

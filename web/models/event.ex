@@ -27,6 +27,11 @@ defmodule Codecasts.Event do
     |> validate_format_optional(:repository_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
   end
 
+  def default_order(query) do
+    from e in query,
+      order_by: [desc: e.date]
+  end
+
   @doc """
   Scope to filter events by title or description.
   Return query without modification if no string or empty string is received.
