@@ -30,7 +30,9 @@ defmodule Codecasts.Mixfile do
       :comeonin,
       :guardian,
       :ueberauth,
-      :ueberauth_google
+      :ueberauth_google,
+      :ex_aws,
+      :httpoison
       ]
     ]
   end
@@ -66,6 +68,7 @@ defmodule Codecasts.Mixfile do
 
       # File uploads
       {:arc, "~> 0.5.2"},
+      {:arc_ecto, "~> 0.4.2"},
       {:ex_aws, "~> 0.4.10"}, # Required if using Amazon S3
       {:httpoison, "~> 0.7"},  # Required if using Amazon S3
       {:poison, "~> 1.2"}     # Required if using Amazon S3
