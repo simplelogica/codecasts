@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="col-sm-4">
-    <img src="http://placehold.it/640x480" width="100%" />
+    <img src="<%= Codecasts.EventImage.url({@event.image, @event}, :small) %>" width="100%" />
     <%= if (@event.user == @conn.assigns.current_user) do %>
     <hr class="divider" />
     <%= link gettext("Edit"), to: event_path(@conn, :edit, @event), class: "btn btn-default btn-block btn-lg" %>&nbsp;

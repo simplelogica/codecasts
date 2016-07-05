@@ -14,7 +14,6 @@ config :codecasts, Codecasts.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../", __DIR__)]]
 
-
 # Watch static and templates for browser reloading.
 config :codecasts, Codecasts.Endpoint,
   live_reload: [
@@ -28,6 +27,15 @@ config :codecasts, Codecasts.Endpoint,
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
+
+config :ex_aws,
+  access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
+  secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
+  region: "eu-west-1"
+
+config :arc,
+  bucket: "tck-codecasts",
+  virtual_host: true
 
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
