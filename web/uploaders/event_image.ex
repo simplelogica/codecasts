@@ -36,9 +36,12 @@ defmodule Codecasts.EventImage do
   end
 
   # Provide a default URL if there hasn't been a file uploaded
-  # def default_url(version, scope) do
-  #   "/images/avatars/default_#{version}.png"
-  # end
+  def default_url(:thumb, _scope) do
+    "https://placeholdit.imgix.net/~text?txtsize=80&txt=No+image+yet&w=500&h=500&txttrack=0"
+  end
+  def default_url(_, _scope) do
+    "https://placeholdit.imgix.net/~text?txtsize=80&txt=No+image+yet&w=640&h=480&txttrack=0"
+  end
 
   # Specify custom headers for s3 objects
   # Available options are [:cache_control, :content_disposition,
