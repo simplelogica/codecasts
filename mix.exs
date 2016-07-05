@@ -62,7 +62,13 @@ defmodule Codecasts.Mixfile do
       # Enums
       {:ecto_enum, "~> 0.3.0"},
       # DateTime funcs
-      {:calecto, "~> 0.16.0"}
+      {:calecto, "~> 0.16.0"},
+
+      # File uploads
+      {:arc, "~> 0.5.2"},
+      {:ex_aws, "~> 0.4.10"}, # Required if using Amazon S3
+      {:httpoison, "~> 0.7"},  # Required if using Amazon S3
+      {:poison, "~> 1.2"}     # Required if using Amazon S3
    ]
   end
 
