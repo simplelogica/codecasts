@@ -1,8 +1,6 @@
 defmodule Codecasts.EventImage do
   use Arc.Definition
-
-  # Include ecto support (requires package arc_ecto installed):
-  # use Arc.Ecto.Definition
+  use Arc.Ecto.Definition # Use with Ecto
 
   @versions [:original, :square, :thumb]
 
@@ -44,7 +42,7 @@ defmodule Codecasts.EventImage do
   #    :content_encoding, :content_length, :content_type,
   #    :expect, :expires, :storage_class, :website_redirect_location]
   #
-  def s3_object_headers(version, {file, scope}) do
+  def s3_object_headers(_version, {file, scope}) do
     [content_type: Plug.MIME.path(file.file_name)]
   end
 end

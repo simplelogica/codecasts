@@ -9,6 +9,7 @@ defmodule Codecasts.Event do
     field :repository_url, :string
     field :date, Ecto.DateTime
     field :place, EventPlaceEnum
+    field :image, Codecasts.EventImage.Type
 
     belongs_to :user, Codecasts.User
 
@@ -21,6 +22,7 @@ defmodule Codecasts.Event do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:title, :description, :video_url, :slideshow_url, :repository_url, :date, :place, :user_id])
+    |> cast_attachments(params, [:image])
     |> validate_required([:title, :description, :date, :user_id])
     |> validate_format_optional(:video_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
     |> validate_format_optional(:slideshow_url, ~r/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
