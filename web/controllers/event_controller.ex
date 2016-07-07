@@ -1,7 +1,7 @@
 defmodule Codecasts.EventController do
   use Codecasts.Web, :controller
 
-  plug :load_event when action in [:edit, :update, :delete]
+  plug :load_event when action in [:show, :edit, :update, :delete]
 
   alias Codecasts.Event
 
@@ -48,11 +48,8 @@ defmodule Codecasts.EventController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    event = Event
-    |> preload(:user)
-    |> Repo.get!(id)
-
+  def show(conn, %{"id" => _id}) do
+    event = conn.assigns.event
     render(conn, "show.html", event: event)
   end
 
@@ -91,9 +88,13 @@ defmodule Codecasts.EventController do
   end
 
   defp load_event(conn, _opts) do
-    event = Repo.get_by(Event, id: conn.params["id"], user_id: conn.assigns.current_user.id)
+    event = Repo.get_by(Event, id: conn.params["id"])
+    action = conn
+    |> Phoenix.Controller.action_name()
 
-    if (event == nil) do
+    event_loaded = current_user(conn) |> can?(action, event)
+
+    unless (event_loaded) do
       conn
       |> put_flash(:error, gettext("Event not found or missing permissions."))
       |> redirect(to: event_path(conn, :index))

@@ -9,6 +9,7 @@ defmodule Codecasts.User do
     field :name, :string
     field :email, :string
     field :bio, :string
+    field :admin, :boolean
 
     has_many :events, Codecasts.Event
 

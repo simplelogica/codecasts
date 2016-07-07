@@ -36,6 +36,9 @@ defmodule Codecasts.Web do
 
       import Codecasts.Router.Helpers
       import Codecasts.Gettext
+
+      import Codecasts.Plug.CurrentUser, only: [current_user: 1]
+      import Canada.Can, only: [can?: 3]
     end
   end
 

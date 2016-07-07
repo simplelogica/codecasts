@@ -1,11 +1,11 @@
-defimpl Canada.Can, for: User do
-  def can?(%User{id: user_id}, action, %Post{user_id: user_id})
-    when action in [:update, :read, :destroy], do: true
+defimpl Canada.Can, for: Codecasts.User do
+  def can?(%Codecasts.User{id: user_id}, action, %Codecasts.Event{user_id: user_id})
+    when action in [:edit, :update, :show, :destroy], do: true
 
-  def can?(%User{admin: admin}, action, _)
-    when action in [:update, :read, :destroy], do: admin
+  def can?(%Codecasts.User{admin: admin}, action, Codecasts.Event)
+    when action in [:edit, :update, :show, :destroy], do: admin
 
   # By default, only read
-  def can?(%User{}, :read, Post) do: true
-  def can?(%User{}, _, Post) do: false
+  def can?(Codecasts.User, :show, Codecasts.Event), do: true
+  def can?(Codecasts.User, _, Codecasts.Event), do: false
 end
