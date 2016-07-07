@@ -61,6 +61,9 @@ defmodule Codecasts.Mixfile do
       {:ueberauth, "~> 0.2"},
       {:ueberauth_google, "~> 0.2"},
 
+      # Authorization
+      {:canada, "~> 1.0.0"},
+
       # Enums
       {:ecto_enum, "~> 0.3.0"},
       # DateTime funcs
